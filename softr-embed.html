@@ -13,6 +13,18 @@
   f.src = src; f.title = 'Entraînement ELTiS';
   f.style.cssText = 'width:100%;height:100%;border:0;border-radius:12px';
   f.setAttribute('allow', 'autoplay');
-  document.getElementById('eltis-wrap').appendChild(f);
+  var wrap = document.getElementById('eltis-wrap');
+  wrap.appendChild(f);
+  // Pleine largeur : retire la limite de largeur des conteneurs Softr autour de ce bloc uniquement.
+  var el = wrap.parentElement;
+  while (el && el !== document.body && !el.matches('main, [class*="content"], [class*="page"]')){
+    var cs = getComputedStyle(el);
+    if (cs.maxWidth !== 'none' || parseFloat(cs.paddingLeft) > 0 || parseFloat(cs.paddingRight) > 0){
+      el.style.setProperty('max-width', '100%', 'important');
+      el.style.setProperty('padding-left', '0', 'important');
+      el.style.setProperty('padding-right', '0', 'important');
+    }
+    el = el.parentElement;
+  }
 })();
 </script>

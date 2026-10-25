@@ -24,7 +24,7 @@
   --ok:#4fd292; --ok-soft:#163626; --bad:#ff8a80; --bad-soft:#3d1f1d; --warn-soft:#3b3116; --lock:#131a2e; color-scheme:dark }
 *{box-sizing:border-box} [hidden]{display:none !important}
 body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body);padding-block:0 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.wrap{max-width:680px;margin:0 auto}
+.wrap{max-width:960px;margin:0 auto}
 header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 10px;border-bottom:1px solid var(--line);margin-bottom:22px}
 .brand{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:.2px}
 .brand small{display:block;font:600 11px/1.2 var(--body);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
@@ -180,7 +180,8 @@ function renderTests(){
     h('div', {class:'stack', style:'gap:8px'},
       h('p', {class:'eyebrow'}, 'ELTiS · tests blancs'),
       h('h1', {}, 'Choisis un test blanc'),
-      h('p', {}, 'Chaque test suit le format officiel. Listening : 27 questions, 5 parties, une seule écoute par exercice. Reading : 35 questions, 3 parties, sans audio. Après chaque exercice, la correction en français.')
+      h('p', {}, "Une plateforme créée par l'équipe Hodos, avec des tests d'entraînement composés d'exercices du même type que ceux du test ELTiS, dans le format officiel."),
+      h('p', {}, 'Listening : 27 questions, 5 parties, une seule écoute par exercice. Reading : 35 questions, 3 parties, sans audio. Après chaque exercice, la correction en français.')
     ),
     h('h2', {class:'secttl'}, 'Compréhension orale · Listening'),
     list(ALL.tests.filter(t => t.mode !== 'reading')),
