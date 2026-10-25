@@ -128,8 +128,8 @@ const READ_INSTR = {1:'Choose the word or phrase that best completes the sentenc
 /* ---------- Configuration Hodos (à adapter) ---------- */
 const CONFIG = {
   webhook: '',          // URL du webhook Make qui reçoit les résultats (vide = aucun envoi)
-  lockKey: '',          // clé partagée avec Softr : si renseignée, la page exige ?key=<lockKey>
-  requireStudent: false // true = la page refuse de s'ouvrir sans ?student=<email> (ouverture depuis Softr uniquement)
+  lockKey: 'a32dbc8f20bf635f66648c3c',  // clé partagée avec Softr : la page exige ?key=<lockKey>
+  requireStudent: true  // true = la page refuse de s'ouvrir sans ?student=<email> (ouverture depuis Softr uniquement)
 };
 const PARAMS = new URLSearchParams(location.search);
 const STUDENT = { email: (PARAMS.get('student') || '').trim().toLowerCase(), name: (PARAMS.get('name') || '').trim(), key: PARAMS.get('key') || '' };
