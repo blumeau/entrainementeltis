@@ -17,18 +17,21 @@ Site statique : `index.html` + `audio/` + `img/`. Aucune dépendance, aucun serv
 Coller `softr-embed.html` dans un bloc « Custom code » d'une page de l'espace élève (utilisateurs connectés).
 Le bloc construit l'iframe avec l'email et le nom de l'élève connecté.
 
-## Résultats envoyés au webhook (un envoi par exercice validé, JSON)
+## Résultats envoyés au webhook (un envoi par exercice validé, POST formulaire)
 ```
-student, name            identité Softr
+student, name            identité Softr (email, nom complet)
 test, testLabel, mode    tb1 / "Test blanc 1" / listening ou reading
 part, partTitle          partie du test
 exercise                 identifiant de l'exercice (ex. P1_1)
-score, total, answers    résultat de l'exercice et réponses choisies
-testDone                 true quand le test complet est terminé
+score, total             résultat de l'exercice
+answers                  réponses choisies (texte JSON)
+testDone                 "true" quand le test complet est terminé
 testScore, testTotal     score cumulé du test
 at                       date ISO
 ```
-Côté Make : Custom webhook → Airtable « Create a record » (table Résultats ELTiS), avec un filtre `testDone = true` si on ne veut garder que les tests complets.
+Scénario Make « ELTiS résultat » : Custom webhook → Airtable « Create a record » (table Résultats ELTiS).
 
-## Progression
-La progression est mémorisée dans le navigateur, par élève (`student`). L'historique fiable est celui d'Airtable.
+## Progression récupérée (GET progressWebhook?student=email)
+Scénario Make « ELTiS progression » : Custom webhook → Airtable « Search records » (filtre sur Élève = student)
+→ Array aggregator (Test, Exercice, Score, Total, Réponses, Date) → Webhook response (JSON du tableau,
+en-tête Access-Control-Allow-Origin: *). La page fusionne avec la progression locale (le plus récent gagne).
