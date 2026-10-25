@@ -126,6 +126,7 @@ const partName = p => (isReading() ? PART_FR_R : PART_FR_L)[p];
 const nQuestions = t => t.exercises.reduce((s,e) => s + e.questions.length, 0);
 const READ_INSTR = {1:'Choose the word or phrase that best completes the sentence.', 2:'Choose the word or phrase that correctly completes the sentence.', 3:'Read the passage, then answer the questions. You can scroll inside the text.'};
 /* ---------- Configuration Hodos (à adapter) ---------- */
+const VERSION = 'v5';
 const CONFIG = {
   webhook: 'https://hook.eu2.make.com/4xqujc6s95vch6k96q81a97t4kwb9fgm', // Make : webhook qui reçoit les résultats (POST). Vide = aucun envoi
   progressWebhook: '',  // Make : webhook qui renvoie la progression d'un élève (GET ?student=email). Vide = progression locale seulement
@@ -410,7 +411,7 @@ document.getElementById('homeBtn').addEventListener('click', () => { if (TEST) r
       h('p', {}, "L'entraînement ELTiS est accessible uniquement depuis ton espace élève, pour que tes résultats soient enregistrés sur ton compte.")));
     return;
   }
-  if (STUDENT.name || STUDENT.email){ const b = document.querySelector('.brand small'); if (b) b.textContent = STUDENT.name || STUDENT.email; }
+  { const b = document.querySelector('.brand small'); if (b) b.textContent = (STUDENT.name || STUDENT.email || 'Hodos') + ' · ' + VERSION; }
   app.replaceChildren(h('p', {class:'sub'}, 'Chargement de ta progression…'));
   loadProgress().then(() => {
     let last = null; try { last = localStorage.getItem(NS + 'last'); } catch(e){}
